@@ -53,14 +53,14 @@ const CROP_PROFILES = {
 
 // ─── INITIAL DATA ──────────────────────────────────────────────────────────────
 const INITIAL_INCIDENTS = [
-  { id: 1, time: "09:02", event: "Trip Started",       type: "info",     gforce: 0.2, temp: 24.1, deduction: 0,  sim: false },
-  { id: 2, time: "09:47", event: "Hard Braking",       type: "warning",  gforce: 1.8, temp: 24.8, deduction: 2,  sim: false },
-  { id: 3, time: "10:15", event: "Severe Pothole",     type: "critical", gforce: 3.1, temp: 25.3, deduction: 5,  sim: false },
-  { id: 4, time: "10:52", event: "Sharp Corner",       type: "warning",  gforce: 1.4, temp: 26.1, deduction: 1,  sim: false },
-  { id: 5, time: "11:45", event: "AC Fluctuation",     type: "critical", gforce: 0.3, temp: 32.0, deduction: 7,  sim: false },
-  { id: 6, time: "12:20", event: "Road Vibration",     type: "warning",  gforce: 1.1, temp: 29.4, deduction: 1,  sim: false },
-  { id: 7, time: "12:58", event: "Sudden Stop",        type: "warning",  gforce: 2.1, temp: 28.5, deduction: 3,  sim: false },
-  { id: 8, time: "13:10", event: "Destination Arrived",type: "info",     gforce: 0.1, temp: 28.5, deduction: 0,  sim: false },
+  { id: 1, time: "09:02", event: "Trip Started", type: "info", gforce: 0.2, temp: 24.1, deduction: 0, sim: false },
+  { id: 2, time: "09:47", event: "Hard Braking", type: "warning", gforce: 1.8, temp: 24.8, deduction: 2, sim: false },
+  { id: 3, time: "10:15", event: "Severe Pothole", type: "critical", gforce: 3.1, temp: 25.3, deduction: 5, sim: false },
+  { id: 4, time: "10:52", event: "Sharp Corner", type: "warning", gforce: 1.4, temp: 26.1, deduction: 1, sim: false },
+  { id: 5, time: "11:45", event: "AC Fluctuation", type: "critical", gforce: 0.3, temp: 32.0, deduction: 7, sim: false },
+  { id: 6, time: "12:20", event: "Road Vibration", type: "warning", gforce: 1.1, temp: 29.4, deduction: 1, sim: false },
+  { id: 7, time: "12:58", event: "Sudden Stop", type: "warning", gforce: 2.1, temp: 28.5, deduction: 3, sim: false },
+  { id: 8, time: "13:10", event: "Destination Arrived", type: "info", gforce: 0.1, temp: 28.5, deduction: 0, sim: false },
 ];
 
 const INITIAL_TEMP_HISTORY = [
@@ -85,7 +85,7 @@ function calcMarketLoss(cis, cargoValue) {
 // ─── HELPERS ───────────────────────────────────────────────────────────────────
 function nowTime() {
   const d = new Date();
-  return `${String(d.getHours()).padStart(2,"0")}:${String(d.getMinutes()).padStart(2,"0")}:${String(d.getSeconds()).padStart(2,"0")}`;
+  return `${String(d.getHours()).padStart(2, "0")}:${String(d.getMinutes()).padStart(2, "0")}:${String(d.getSeconds()).padStart(2, "0")}`;
 }
 
 function computeCIS(incidents) {
@@ -93,30 +93,30 @@ function computeCIS(incidents) {
 }
 
 function getTempStatusKey(temp, profile) {
-  if (temp > profile.tempDanger)  return "critical";
+  if (temp > profile.tempDanger) return "critical";
   if (temp > profile.tempWarning) return "warning";
   return "optimal";
 }
 
 function getGForceStatusKey(g, profile) {
   if (g > profile.gforceCritical) return "critical";
-  if (g > profile.gforceWarning)  return "warning";
+  if (g > profile.gforceWarning) return "warning";
   return "stable";
 }
 
 function getTiltStatusKey(tilt, profile) {
-  if (tilt > profile.tiltCritical)      return "critical";
+  if (tilt > profile.tiltCritical) return "critical";
   if (tilt > profile.tiltCritical * 0.6) return "warning";
   return "stable";
 }
 
 // ─── STATUS STYLES ─────────────────────────────────────────────────────────────
 const STATUS_COLORS = {
-  critical: { text: "text-red-400",     bg: "bg-red-400/10",     border: "border-red-400/30",     dot: "bg-red-400",     hex: "#ef4444" },
-  warning:  { text: "text-amber-400",   bg: "bg-amber-400/10",   border: "border-amber-400/30",   dot: "bg-amber-400",   hex: "#f59e0b" },
-  optimal:  { text: "text-emerald-400", bg: "bg-emerald-400/10", border: "border-emerald-400/30", dot: "bg-emerald-400", hex: "#10b981" },
-  stable:   { text: "text-sky-400",     bg: "bg-sky-400/10",     border: "border-sky-400/30",     dot: "bg-sky-400",     hex: "#38bdf8" },
-  info:     { text: "text-slate-400",   bg: "bg-slate-400/10",   border: "border-slate-400/20",   dot: "bg-slate-400",   hex: "#94a3b8" },
+  critical: { text: "text-red-400", bg: "bg-red-400/10", border: "border-red-400/30", dot: "bg-red-400", hex: "#ef4444" },
+  warning: { text: "text-amber-400", bg: "bg-amber-400/10", border: "border-amber-400/30", dot: "bg-amber-400", hex: "#f59e0b" },
+  optimal: { text: "text-emerald-400", bg: "bg-emerald-400/10", border: "border-emerald-400/30", dot: "bg-emerald-400", hex: "#10b981" },
+  stable: { text: "text-sky-400", bg: "bg-sky-400/10", border: "border-sky-400/30", dot: "bg-sky-400", hex: "#38bdf8" },
+  info: { text: "text-slate-400", bg: "bg-slate-400/10", border: "border-slate-400/20", dot: "bg-slate-400", hex: "#94a3b8" },
 };
 
 const STATUS_LABEL = { critical: "Critical", warning: "Warning", optimal: "Optimal", stable: "Stable", info: "Stable" };
@@ -140,8 +140,8 @@ function CircularGauge({ value, size = 160 }) {
   const color = value >= 85 ? "#10b981" : value >= 70 ? "#f59e0b" : "#ef4444";
   return (
     <svg width={size} height={size} style={{ transform: "rotate(-90deg)" }}>
-      <circle cx={size/2} cy={size/2} r={radius} fill="none" stroke="#1e293b" strokeWidth={14} />
-      <circle cx={size/2} cy={size/2} r={radius} fill="none" stroke={color} strokeWidth={14}
+      <circle cx={size / 2} cy={size / 2} r={radius} fill="none" stroke="#1e293b" strokeWidth={14} />
+      <circle cx={size / 2} cy={size / 2} r={radius} fill="none" stroke={color} strokeWidth={14}
         strokeDasharray={`${strokeDash} ${circumference}`} strokeLinecap="round"
         style={{ filter: `drop-shadow(0 0 10px ${color}90)`, transition: "stroke-dasharray 0.8s cubic-bezier(.4,0,.2,1), stroke 0.5s ease" }} />
     </svg>
@@ -295,19 +295,19 @@ function SimDrawer({ open, onClose, tripData, onTempChange, onGForceChange, onIn
 
           {/* Inject Events */}
           <SimSection title="INSTANT INCIDENT INJECTION" icon={<Zap size={11} />}>
-            <InjectBtn label="🕳  Simulate Pothole"   sub={`3.5g shock · CIS −5% · $${(0.05 * profile.cargoValue).toFixed(0)} loss`} color="#ef4444" active={flashEvent==="pothole"} onClick={() => onInject("pothole")} />
-            <InjectBtn label="🌡  Simulate AC Failure" sub={`35°C spike · CIS −10% · $${(0.10 * profile.cargoValue).toFixed(0)} loss`} color="#f97316" active={flashEvent==="ac"}      onClick={() => onInject("ac")}      />
-            <InjectBtn label="📦  Simulate Cargo Shift" sub={`28° tilt · CIS −6% · $${(0.06 * profile.cargoValue).toFixed(0)} loss`} color="#a78bfa" active={flashEvent==="shift"}   onClick={() => onInject("shift")}   />
+            <InjectBtn label="🕳  Simulate Pothole" sub={`3.5g shock · CIS −5% · $${(0.05 * profile.cargoValue).toFixed(0)} loss`} color="#ef4444" active={flashEvent === "pothole"} onClick={() => onInject("pothole")} />
+            <InjectBtn label="🌡  Simulate AC Failure" sub={`35°C spike · CIS −10% · $${(0.10 * profile.cargoValue).toFixed(0)} loss`} color="#f97316" active={flashEvent === "ac"} onClick={() => onInject("ac")} />
+            <InjectBtn label="📦  Simulate Cargo Shift" sub={`28° tilt · CIS −6% · $${(0.06 * profile.cargoValue).toFixed(0)} loss`} color="#a78bfa" active={flashEvent === "shift"} onClick={() => onInject("shift")} />
           </SimSection>
 
           {/* Live readout */}
           <SimSection title="LIVE OVERRIDE VALUES" icon={<Cpu size={11} />}>
             <div className="grid grid-cols-2 gap-2">
               {[
-                ["TEMP",    `${tripData.currentTemp.toFixed(1)}°C`, tripData.currentTemp > profile.tempDanger ? "#ef4444" : "#a78bfa"],
-                ["G-FORCE", `${tripData.peakGForce.toFixed(1)}g`,   tripData.peakGForce > profile.gforceCritical ? "#ef4444" : "#a78bfa"],
-                ["TILT",    `${tripData.currentTilt}°`,             tripData.currentTilt > profile.tiltCritical ? "#ef4444" : "#a78bfa"],
-                ["CIS",     `${tripData.cisScore}%`,                tripData.cisScore < 70 ? "#ef4444" : tripData.cisScore < 85 ? "#f59e0b" : "#10b981"],
+                ["TEMP", `${tripData.currentTemp.toFixed(1)}°C`, tripData.currentTemp > profile.tempDanger ? "#ef4444" : "#a78bfa"],
+                ["G-FORCE", `${tripData.peakGForce.toFixed(1)}g`, tripData.peakGForce > profile.gforceCritical ? "#ef4444" : "#a78bfa"],
+                ["TILT", `${tripData.currentTilt}°`, tripData.currentTilt > profile.tiltCritical ? "#ef4444" : "#a78bfa"],
+                ["CIS", `${tripData.cisScore}%`, tripData.cisScore < 70 ? "#ef4444" : tripData.cisScore < 85 ? "#f59e0b" : "#10b981"],
               ].map(([k, v, c]) => (
                 <div key={k} className="rounded-lg p-2" style={{ background: "rgba(124,58,237,0.07)", border: "1px solid rgba(124,58,237,0.15)" }}>
                   <p className="text-xs mono" style={{ color: "#5b21b6" }}>{k}</p>
@@ -412,15 +412,15 @@ export default function Dashboard() {
   );
 
   // ── Derived status keys ─────────────────────────────────────────────────────
-  const tempStatusKey   = getTempStatusKey(tripData.currentTemp, profile);
-  const shockStatusKey  = getGForceStatusKey(tripData.peakGForce, profile);
-  const tiltStatusKey   = getTiltStatusKey(tripData.currentTilt, profile);
-  const humidStatusKey  = "optimal";
+  const tempStatusKey = getTempStatusKey(tripData.currentTemp, profile);
+  const shockStatusKey = getGForceStatusKey(tripData.peakGForce, profile);
+  const tiltStatusKey = getTiltStatusKey(tripData.currentTilt, profile);
+  const humidStatusKey = "optimal";
 
-  const cisColor     = tripData.cisScore >= 85 ? "text-emerald-400" : tripData.cisScore >= 70 ? "text-amber-400" : "text-red-400";
-  const cisBgFrom    = tripData.cisScore >= 85 ? "from-emerald-500/10" : tripData.cisScore >= 70 ? "from-amber-500/10" : "from-red-500/10";
+  const cisColor = tripData.cisScore >= 85 ? "text-emerald-400" : tripData.cisScore >= 70 ? "text-amber-400" : "text-red-400";
+  const cisBgFrom = tripData.cisScore >= 85 ? "from-emerald-500/10" : tripData.cisScore >= 70 ? "from-amber-500/10" : "from-red-500/10";
   const cisRiskLabel = tripData.cisScore >= 85 ? "Good Condition" : tripData.cisScore >= 70 ? "Moderate Risk" : "High Risk";
-  const verdictRisk  = tripData.cisScore >= 85 ? "LOW RISK" : tripData.cisScore >= 70 ? "MODERATE RISK" : "HIGH RISK";
+  const verdictRisk = tripData.cisScore >= 85 ? "LOW RISK" : tripData.cisScore >= 70 ? "MODERATE RISK" : "HIGH RISK";
   const verdictColor = tripData.cisScore >= 85 ? "bg-emerald-500/20 text-emerald-400 border-emerald-500/30" : tripData.cisScore >= 70 ? "bg-amber-500/20 text-amber-400 border-amber-500/30" : "bg-red-500/20 text-red-400 border-red-500/30";
 
   // ── Temperature slider handler ──────────────────────────────────────────────
@@ -445,11 +445,11 @@ export default function Dashboard() {
 
     if (type === "pothole") {
       gforceVal = 3.5; deduction = 5;
-      entry = { id, time: t, event: "🕳 Simulated Pothole",    type: "critical", gforce: gforceVal, temp: tripData.currentTemp, deduction, sim: true };
+      entry = { id, time: t, event: "🕳 Simulated Pothole", type: "critical", gforce: gforceVal, temp: tripData.currentTemp, deduction, sim: true };
       setTripData(d => ({ ...d, peakGForce: gforceVal, cisScore: Math.max(0, d.cisScore - deduction) }));
     } else if (type === "ac") {
       tempVal = 35.0; deduction = 10;
-      entry = { id, time: t, event: "🌡 Simulated AC Failure",  type: "critical", gforce: tripData.peakGForce, temp: tempVal, deduction, sim: true };
+      entry = { id, time: t, event: "🌡 Simulated AC Failure", type: "critical", gforce: tripData.peakGForce, temp: tempVal, deduction, sim: true };
       setTripData(d => ({ ...d, currentTemp: tempVal, cisScore: Math.max(0, d.cisScore - deduction) }));
       setTempHistory(h => [...h.slice(-19), { time: t, temp: tempVal }]);
     } else if (type === "shift") {
@@ -595,23 +595,23 @@ export default function Dashboard() {
           </div>
 
           <div className="card p-3 flex flex-wrap gap-x-6 gap-y-2 items-center">
-            <MetaItem label="TRIP ID"   value="#TRK-2026-001" highlight />
-            <MetaItem label="VEHICLE"   value="MH-12-AB-7743" />
-            <MetaItem label="ROUTE"     value="Nashik → Mumbai APMC" />
-            <MetaItem label="DURATION"  value="4h 08m" />
-            <MetaItem label="DISTANCE"  value="213 km" />
-            <div className="ml-auto flex items-center gap-2">
+            <MetaItem label="TRIP ID" value="#TRK-2026-001" highlight />
+            <MetaItem label="VEHICLE" value="MH-12-AB-7743" />
+            <MetaItem label="ROUTE" value="Nashik → Mumbai APMC" />
+            <MetaItem label="DURATION" value="4h 08m" />
+            <MetaItem label="DISTANCE" value="213 km" />
+            <div className="ml-auto flex items-center gap-2 relative z-50">
               <span className="text-xs text-slate-500 mono">CARGO</span>
               <div className="relative">
                 <button onClick={() => setDropOpen(!dropOpen)}
-                  className="flex items-center gap-2 bg-slate-800 border border-slate-600 rounded-lg px-3 py-1.5 text-sm font-semibold text-white hover:border-amber-500/50 transition-colors mono">
+                  className="flex items-center gap-2 bg-slate-800 border border-slate-600 rounded-lg px-3 py-1.5 text-sm font-semibold text-white hover:border-amber-500/50 transition-colors mono relative z-50">
                   {profile.emoji} {crop} <ChevronDown size={12} className={`transition-transform ${dropOpen ? "rotate-180" : ""}`} />
                 </button>
                 {dropOpen && (
-                  <div className="absolute right-0 top-full mt-1 bg-slate-800 border border-slate-600 rounded-lg overflow-hidden z-50 shadow-2xl">
+                  <div className="absolute right-0 top-full mt-1 bg-slate-900 border border-slate-600 rounded-lg overflow-hidden z-[9999] shadow-2xl min-w-[200px]">
                     {Object.entries(CROP_PROFILES).map(([name, p]) => (
                       <button key={name} onClick={() => { setCrop(name); setDropOpen(false); }}
-                        className={`block w-full text-left px-4 py-2.5 text-sm mono hover:bg-slate-700 transition-colors ${name === crop ? "text-amber-400" : "text-slate-300"}`}>
+                        className={`block w-full text-left px-4 py-2.5 text-sm mono hover:bg-slate-700 transition-colors ${name === crop ? "text-amber-400" : "text-slate-300"} relative z-[9999]`}>
                         <span className="mr-2">{p.emoji}</span>{name}
                         <span className="ml-2 text-xs" style={{ color: "#5b21b6" }}>· {p.sensitivity} sensitivity</span>
                       </button>
@@ -624,7 +624,7 @@ export default function Dashboard() {
         </div>
 
         {/* HERO ROW — CIS + Status Cards */}
-        <div className="fade-in s2 grid grid-cols-1 lg:grid-cols-5 gap-4 mb-4">
+        <div className="fade-in s2 grid grid-cols-1 lg:grid-cols-5 gap-4 mb-4 relative z-10">
 
           {/* CIS Gauge */}
           <div className={`card p-5 lg:col-span-2 bg-gradient-to-br ${cisBgFrom} to-transparent`}
@@ -655,10 +655,10 @@ export default function Dashboard() {
                   </div>
                   <div className="h-px bg-slate-700/50" />
                   <div className="grid grid-cols-2 gap-2">
-                    <MiniStat label="Base CIS"    value={`${BASE_CIS}%`}               colorClass="text-amber-400" />
-                    <MiniStat label="Current CIS" value={`${tripData.cisScore}%`}       colorClass={cisColor} />
-                    <MiniStat label="Incidents"   value={incidents.filter(i => i.deduction > 0).length} colorClass="text-orange-400" />
-                    <MiniStat label="Deduction"   value={`−${BASE_CIS - tripData.cisScore}%`} colorClass="text-red-400" />
+                    <MiniStat label="Base CIS" value={`${BASE_CIS}%`} colorClass="text-amber-400" />
+                    <MiniStat label="Current CIS" value={`${tripData.cisScore}%`} colorClass={cisColor} />
+                    <MiniStat label="Incidents" value={incidents.filter(i => i.deduction > 0).length} colorClass="text-orange-400" />
+                    <MiniStat label="Deduction" value={`−${BASE_CIS - tripData.cisScore}%`} colorClass="text-red-400" />
                   </div>
                 </div>
               </div>
@@ -733,7 +733,7 @@ export default function Dashboard() {
               <AreaChart data={tempHistory} margin={{ top: 5, right: 5, bottom: 0, left: -10 }}>
                 <defs>
                   <linearGradient id="tg" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%"  stopColor="#f59e0b" stopOpacity={0.3} />
+                    <stop offset="5%" stopColor="#f59e0b" stopOpacity={0.3} />
                     <stop offset="95%" stopColor="#f59e0b" stopOpacity={0} />
                   </linearGradient>
                 </defs>
@@ -783,8 +783,8 @@ export default function Dashboard() {
             <div className="mt-3 pt-3 border-t border-slate-700/50 space-y-1">
               {[
                 ["Total Deduction", `−${BASE_CIS - tripData.cisScore}%`, "text-red-400 font-bold"],
-                ["Base Score",      `${BASE_CIS}%`,                       "text-amber-400"],
-                ["Current Score",   `${tripData.cisScore}%`,              cisColor + " font-bold"],
+                ["Base Score", `${BASE_CIS}%`, "text-amber-400"],
+                ["Current Score", `${tripData.cisScore}%`, cisColor + " font-bold"],
               ].map(([l, v, c]) => (
                 <div key={l} className="flex justify-between text-xs mono">
                   <span className="text-slate-500">{l}</span>
@@ -818,7 +818,7 @@ export default function Dashboard() {
             <table className="w-full text-xs">
               <thead className="sticky top-0 z-10" style={{ background: "#0f172a" }}>
                 <tr className="border-b border-slate-700/50">
-                  {["TIME","EVENT","TYPE","G-FORCE","TEMP","DEDUCTION","SOURCE"].map(h => (
+                  {["TIME", "EVENT", "TYPE", "G-FORCE", "TEMP", "DEDUCTION", "SOURCE"].map(h => (
                     <th key={h} className="px-4 py-3 text-left text-slate-500 mono font-medium tracking-widest uppercase whitespace-nowrap">{h}</th>
                   ))}
                 </tr>
