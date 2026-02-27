@@ -15,7 +15,7 @@ import {
 const CROP_PROFILES = {
   Tomatoes: {
     emoji: "🍅",
-    cargoValue: 10000,           // USD total cargo value
+    cargoValue: 800000,          // INR total cargo value
     tempDanger: 30,              // °C — biological safety limit
     tempWarning: 27,
     gforceCritical: 2.0,        // g — internal bruising threshold
@@ -27,7 +27,7 @@ const CROP_PROFILES = {
   },
   Bananas: {
     emoji: "🍌",
-    cargoValue: 8000,
+    cargoValue: 640000,
     tempDanger: 25,             // Bananas are highly chilling-sensitive, tighter range
     tempWarning: 22,
     gforceCritical: 1.5,        // Softer fruit — bruises easier
@@ -39,7 +39,7 @@ const CROP_PROFILES = {
   },
   Potatoes: {
     emoji: "🥔",
-    cargoValue: 6000,
+    cargoValue: 480000,
     tempDanger: 35,             // Potatoes are hardier
     tempWarning: 30,
     gforceCritical: 3.0,
@@ -295,9 +295,9 @@ function SimDrawer({ open, onClose, tripData, onTempChange, onGForceChange, onIn
 
           {/* Inject Events */}
           <SimSection title="INSTANT INCIDENT INJECTION" icon={<Zap size={11} />}>
-            <InjectBtn label="🕳  Simulate Pothole" sub={`3.5g shock · CIS −5% · $${(0.05 * profile.cargoValue).toFixed(0)} loss`} color="#ef4444" active={flashEvent === "pothole"} onClick={() => onInject("pothole")} />
-            <InjectBtn label="🌡  Simulate AC Failure" sub={`35°C spike · CIS −10% · $${(0.10 * profile.cargoValue).toFixed(0)} loss`} color="#f97316" active={flashEvent === "ac"} onClick={() => onInject("ac")} />
-            <InjectBtn label="📦  Simulate Cargo Shift" sub={`28° tilt · CIS −6% · $${(0.06 * profile.cargoValue).toFixed(0)} loss`} color="#a78bfa" active={flashEvent === "shift"} onClick={() => onInject("shift")} />
+            <InjectBtn label="🕳  Simulate Pothole" sub={`3.5g shock · CIS −5% · ₹${(0.05 * profile.cargoValue).toFixed(0)} loss`} color="#ef4444" active={flashEvent === "pothole"} onClick={() => onInject("pothole")} />
+            <InjectBtn label="🌡  Simulate AC Failure" sub={`35°C spike · CIS −10% · ₹${(0.10 * profile.cargoValue).toFixed(0)} loss`} color="#f97316" active={flashEvent === "ac"} onClick={() => onInject("ac")} />
+            <InjectBtn label="📦  Simulate Cargo Shift" sub={`28° tilt · CIS −6% · ₹${(0.06 * profile.cargoValue).toFixed(0)} loss`} color="#a78bfa" active={flashEvent === "shift"} onClick={() => onInject("shift")} />
           </SimSection>
 
           {/* Live readout */}
@@ -584,7 +584,7 @@ export default function Dashboard() {
                   )}
                 </div>
                 <p className="text-xs text-slate-500 sans mt-0.5">
-                  Black Box Report · Agricultural Cargo · Cargo Value: {profile.cargoValue.toLocaleString("en-US", { style: "currency", currency: "USD" })}
+                  Black Box Report · Agricultural Cargo · Cargo Value: {profile.cargoValue.toLocaleString("en-IN", { style: "currency", currency: "INR", maximumFractionDigits: 0 })}
                 </p>
               </div>
             </div>
@@ -649,9 +649,9 @@ export default function Dashboard() {
                   <div>
                     <p className="text-xs text-slate-500 mono mb-1">MARKET VALUE LOSS</p>
                     <p className="text-xl font-bold text-red-400 mono value-flash" key={marketLoss.toFixed(0)}>
-                      {marketLoss.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 })}
+                      {marketLoss.toLocaleString("en-IN", { style: "currency", currency: "INR", maximumFractionDigits: 0 })}
                     </p>
-                    <p className="text-xs text-slate-600 sans">of {profile.cargoValue.toLocaleString("en-US", { style: "currency", currency: "USD" })} cargo</p>
+                    <p className="text-xs text-slate-600 sans">of {profile.cargoValue.toLocaleString("en-IN", { style: "currency", currency: "INR", maximumFractionDigits: 0 })} cargo</p>
                   </div>
                   <div className="h-px bg-slate-700/50" />
                   <div className="grid grid-cols-2 gap-2">
@@ -881,7 +881,7 @@ export default function Dashboard() {
                 <VerdictPoint icon="🌡️" title="Cold Chain"
                   detail={`${tripData.currentTemp > profile.tempDanger ? `ACTIVE BREACH at ${tripData.currentTemp.toFixed(1)}°C (limit ${profile.tempDanger}°C). Accelerated ripening in progress.` : `Temperature ${tripData.currentTemp.toFixed(1)}°C within safe range. Cold chain maintained.`}`} />
                 <VerdictPoint icon="📦" title="Commercial Action"
-                  detail={`CIS ${tripData.cisScore}% → Est. loss ${Math.abs(marketLoss).toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 })}. ${tripData.cisScore < 75 ? "Route to discount retail or processing unit." : tripData.cisScore < 85 ? "Inspect batch. Priority dispatch." : "Standard sale. No deduction required."}`} />
+                  detail={`CIS ${tripData.cisScore}% → Est. loss ${Math.abs(marketLoss).toLocaleString("en-IN", { style: "currency", currency: "INR", maximumFractionDigits: 0 })}. ${tripData.cisScore < 75 ? "Route to discount retail or processing unit." : tripData.cisScore < 85 ? "Inspect batch. Priority dispatch." : "Standard sale. No deduction required."}`} />
               </div>
             </div>
           </div>
