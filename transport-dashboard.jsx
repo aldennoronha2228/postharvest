@@ -563,7 +563,7 @@ export default function Dashboard() {
       <div className="relative z-10 max-w-6xl mx-auto px-4 py-6">
 
         {/* HEADER */}
-        <div className="fade-in s1 mb-6">
+        <div className="fade-in s1 mb-6 relative z-50">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-2">
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 rounded-lg bg-amber-500/20 border border-amber-500/30 flex items-center justify-center">
@@ -594,7 +594,7 @@ export default function Dashboard() {
             </div>
           </div>
 
-          <div className="card p-3 flex flex-wrap gap-x-6 gap-y-2 items-center">
+          <div className="card p-3 flex flex-wrap gap-x-6 gap-y-2 items-center relative z-50">
             <MetaItem label="TRIP ID" value="#TRK-2026-001" highlight />
             <MetaItem label="VEHICLE" value="MH-12-AB-7743" />
             <MetaItem label="ROUTE" value="Nashik → Mumbai APMC" />
